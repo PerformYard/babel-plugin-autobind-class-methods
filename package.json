@@ -1,0 +1,28 @@
+{
+  "name": "babel-plugin-autobind-class-methods",
+  "version": "0.0.1",
+  "description": "Babel plugin that binds every class method to \"this\" with hot reload support",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UgnisSoftware/babel-plugin-autobind-class-methods.git"
+  },
+  "keywords": [
+    "Babel",
+    "class",
+    "autobind",
+    "this",
+    "bind",
+    "arrow",
+    "property"
+  ],
+  "author": "Karolis Masiulis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/UgnisSoftware/babel-plugin-autobind-class-methods/issues"
+  },
+  "homepage": "https://github.com/UgnisSoftware/babel-plugin-autobind-class-methods#readme"
+}
