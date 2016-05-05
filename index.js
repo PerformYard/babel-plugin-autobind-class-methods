@@ -4,7 +4,8 @@ exports.__esModule = true;
 
 var template = require("babel-template");
 
-module.exports = function ({ types: t }) {
+module.exports = function (_ref) {
+    var t = _ref.types;
     return {
         inherits: require("babel-plugin-syntax-class-properties"),
 
@@ -50,9 +51,8 @@ module.exports = function ({ types: t }) {
                     constructor.get("body").pushContainer("body", node)
                 })
 
-                if (!isDerived) {
-                    constructor.get("body").insertBefore(template(`var _this = this;`)({}))
-                }
+                constructor.get("body").insertAfter(template(`var _this = this;`)({}))
+
             }
         }
     };
