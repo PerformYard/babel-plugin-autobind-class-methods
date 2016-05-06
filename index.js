@@ -1,3 +1,4 @@
+'use strict'
 // TODO REFACTOR, this was written as a hack
 
 exports.__esModule = true;
