@@ -27,17 +27,10 @@ module.exports = function (_ref) {
 
                 state.file.path.unshiftContainer("body",(template('function _makeJsClassGreatAgain(_this, funcName, params){return Object.getPrototypeOf(_this)[funcName].apply(_this, params)};')({})))
 
-                var newNodes = methods.map((method)=>
-                    t.assignmentExpression(
-                        "=",
-                        t.memberExpression(t.thisExpression(), method),
-                        t.functionExpression(null,[],
-                            t.blockStatement([
-                                template('return _makeJsClassGreatAgain(_this, \'' + method.name + '\', arguments)')({})
-                            ])
-                        )
-                    )
-                )
+                var newNodes = methods.map((method)=> {
+                        return template('THIS.METHOD = ()=> _makeJsClassGreatAgain(THIS, \'' + method.name + '\', arguments)')({THIS: t.thisExpression(), METHOD: method})
+                    }
+                );
 
                 if (!constructor) {
                     let newConstructor = t.classMethod("constructor", t.identifier("constructor"), [], t.blockStatement([]));
@@ -51,9 +44,6 @@ module.exports = function (_ref) {
                 newNodes.forEach((node)=>{
                     constructor.get("body").pushContainer("body", node)
                 })
-
-                constructor.get("body").insertAfter(template(`var _this = this;`)({}))
-
             }
         }
     };
