@@ -15,3 +15,20 @@ Example .babelrc:
   "plugins": ["autobind-class-methods", "react-hot-loader/babel"]
 }
 ```
+
+TODO:
+  - ignore binding for React components:
+```
+[
+    'componentWillMount',
+    'componentDidMount',
+    'componentWillReceiveProps',
+    'shouldComponentUpdate',
+    'componentWillUpdate',
+    'componentDidUpdate',
+    'componentWillUnmount'
+    'render',
+]
+```
+  - find out how babel tests plugins
+  - rewrite to ES6 and add a transpiler
