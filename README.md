@@ -1,7 +1,7 @@
-# babel-plugin-autobind-class-methods
-Autobinds "this" to class methods, works with hot reloading, created to be used with React
+# babel-plugin-autobind-class-methods v2.0.0
+Autobinds "this" to class methods and works with hot reloading.
 
-Requires React Hot Loader 3
+Compatible with the latest React Hot Loader 3-beta
 
 Install:
 ```
@@ -15,20 +15,3 @@ Example .babelrc:
   "plugins": ["autobind-class-methods", "react-hot-loader/babel"]
 }
 ```
-
-TODO:
-  - ignore binding for React components:
-```
-[
-    'componentWillMount',
-    'componentDidMount',
-    'componentWillReceiveProps',
-    'shouldComponentUpdate',
-    'componentWillUpdate',
-    'componentDidUpdate',
-    'componentWillUnmount'
-    'render',
-]
-```
-  - find out how babel tests plugins
-  - rewrite to ES6 and add a transpiler
