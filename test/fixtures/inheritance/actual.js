@@ -1,11 +1,14 @@
-class Example {
-  
-  constructor(){
-    this.greeting = 'Hello'
-  }
-  
+class Simple {
   greet(){
     console.log(this.greeting)
+  }
+}
+
+class Example extends Simple {
+  
+  constructor(){
+    super()
+    this.greeting = 'Hello'
   }
   
   render(){
