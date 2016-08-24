@@ -45,8 +45,6 @@ var Example = function (_Simple) {
 
     var _this3 = _possibleConstructorReturn(this, Object.getPrototypeOf(Example).call(this));
 
-    _this3.greeting = 'Hello';
-
     _this3.render = function () {
       for (var _len2 = arguments.length, rest = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
         rest[_key2] = arguments[_key2];
@@ -55,6 +53,7 @@ var Example = function (_Simple) {
       return _makeJsClassGreatAgain(_this3, 'render', rest);
     };
 
+    _this3.greeting = 'Hello';
     return _this3;
   }
 

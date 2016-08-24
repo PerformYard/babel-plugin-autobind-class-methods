@@ -3,6 +3,13 @@ var template = require("babel-template");
 export default ({types: t}) => ({
   visitor: {
     ClassExpression: function(path, state){
+      const findBareSupers = {
+        Super(path) {
+          if (path.parentPath.isCallExpression({ callee: path.node })) {
+            this.push(path.parentPath);
+          }
+        }
+      };
       let isDerived = !!path.node.superClass;
       let constructor;
       let body = path.get("body");
@@ -40,11 +47,20 @@ export default ({types: t}) => ({
         }
         constructor = body.unshiftContainer("body", newConstructor)[0];
       }
-      
-      newNodes.forEach((node)=>{
-        constructor.node.body.body.push(node);
-      })
-      
+  
+      if (isDerived) {
+        let bareSupers = [];
+        constructor.traverse(findBareSupers, bareSupers);
+        for (let bareSuper of bareSupers) {
+          newNodes.forEach((node)=>{
+            bareSuper.insertAfter(node);
+          })
+        }
+      } else {
+        newNodes.forEach((node)=>{
+          constructor.get("body").unshiftContainer("body", node);
+        })
+      }
     }
   }
 });

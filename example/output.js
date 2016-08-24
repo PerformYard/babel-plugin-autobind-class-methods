@@ -14,23 +14,23 @@ var Example = function () {
 
     _classCallCheck(this, Example);
 
-    this.greeting = 'Hello';
-
-    this.greet = function () {
+    this.render = function () {
       for (var _len = arguments.length, rest = Array(_len), _key = 0; _key < _len; _key++) {
         rest[_key] = arguments[_key];
+      }
+
+      return _makeJsClassGreatAgain(_this2, 'render', rest);
+    };
+
+    this.greet = function () {
+      for (var _len2 = arguments.length, rest = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        rest[_key2] = arguments[_key2];
       }
 
       return _makeJsClassGreatAgain(_this2, 'greet', rest);
     };
 
-    this.render = function () {
-      for (var _len2 = arguments.length, rest = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        rest[_key2] = arguments[_key2];
-      }
-
-      return _makeJsClassGreatAgain(_this2, 'render', rest);
-    };
+    this.greeting = 'Hello';
   }
 
   _createClass(Example, [{
