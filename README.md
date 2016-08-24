@@ -1,4 +1,4 @@
-# babel-plugin-autobind-class-methods v2.0.0
+# babel-plugin-autobind-class-methods
 Autobinds "this" to class methods and works with hot reloading.
 
 Compatible with the latest React Hot Loader 3-beta
