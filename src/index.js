@@ -17,7 +17,7 @@ export default ({types: t})=> ({
             for (const node of body.get('body')) {
                 if (node.isClassMethod({ kind: 'constructor' })) {
                     constructor = node
-                } else {
+                } else if (node.isClassMethod({ kind: 'method' })) {
                     methods.push(node.node.key)
                 }
             }
