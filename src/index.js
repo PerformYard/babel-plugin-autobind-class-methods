@@ -32,14 +32,17 @@ export default ({ types }) => ({
     ClassExpression(path, state) {
       const classBody = path.get('body');
 
-      classBody.get('body')
-        .filter((node) => (
-          node.isClassMethod({ kind: 'method' })
-          && IGNORED_METHODS.indexOf(node.node.key.name) == -1
-        ))
-        .forEach((node) => {
-          classBody.pushContainer('body', buildBoundMethod(types, node.node.key.name))
-        });
+      classBody.pushContainer('body',
+        classBody.get('body')
+          .filter((node) => (
+            node.isClassMethod({ kind: 'method' })
+            && IGNORED_METHODS.indexOf(node.node.key.name) == -1
+            && !node.node.static
+          ))
+          .map((node) => (
+            buildBoundMethod(types, node.node.key.name)
+          ))
+      );
     },
   },
 });
