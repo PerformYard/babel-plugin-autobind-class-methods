@@ -1,64 +1,45 @@
-const template = require('babel-template')
+const IGNORED_METHODS = [
+  'componentWillMount',
+  'componentDidMount',
+  'componentWillReceiveProps',
+  'shouldComponentUpdate',
+  'componentWillUpdate',
+  'componentDidUpdate',
+  'componentWillUnmount',
+  'render',
+];
+const buildBoundMethod = (types, methodName) =>
+  types.classProperty(
+    types.identifier(methodName),
+    types.callExpression(
+      types.memberExpression(
+        types.memberExpression(
+          types.thisExpression(),
+          types.identifier(methodName),
+          false
+        ),
+        types.identifier('bind'),
+        false
+      ),
+      [
+        types.thisExpression(),
+      ]
+    )
+  );
 
-export default ({types: t})=> ({
+export default ({ types }) => ({
   visitor: {
-    ClassExpression: (path, state)=> {
-      const findBareSupers = {
-        Super(path) {
-          if (path.parentPath.isCallExpression({ callee: path.node })) {
-            this.push(path.parentPath)
-          }
-        },
-      }
-      const isDerived = !!path.node.superClass
-      let constructor
-      const body = path.get('body')
-      const methods = []
-      for (const node of body.get('body')) {
-        if (node.isClassMethod({ kind: 'constructor' })) {
-          constructor = node
-        } else if (node.isClassMethod({ kind: 'method' })) {
-          methods.push(node.node.key)
-        }
-      }
-      const name = '_makeJsClassGreatAgain'
-      let uid
-      if (!state.file.usedHelpers[name]) {
-        state.file.metadata.usedHelpers.push(name)
-        uid = state.file.scope.generateUidIdentifier(name)
-        state.file.usedHelpers[name] = uid
-        state.file.path.unshiftContainer('body', template('function UID(_this, funcName, params){return Object.getPrototypeOf(_this)[funcName].apply(_this, params)}')({UID: uid}))
-      } else {
-        uid = state.file.usedHelpers[name]
-      }
+    ClassExpression(path, state) {
+      const classBody = path.get('body');
 
-      const newNodes = methods
-        .map((method)=>
-          template(`THIS.METHOD = (...rest) => UID(THIS, '${method.name}', rest)`)({UID: uid, THIS: t.thisExpression(), METHOD: method})
-        )
-
-      if (!constructor) {
-        const newConstructor = t.classMethod('constructor', t.identifier('constructor'), [], t.blockStatement([]))
-        if (isDerived) {
-          newConstructor.params = [t.restElement(t.identifier('args'))]
-          newConstructor.body.body.push(t.returnStatement(t.callExpression(t.super(), [t.spreadElement(t.identifier('args'))])))
-        }
-        constructor = body.unshiftContainer('body', newConstructor)[0]
-      }
-
-      if (isDerived) {
-        const bareSupers = []
-        constructor.traverse(findBareSupers, bareSupers)
-        for (const bareSuper of bareSupers) {
-          newNodes.forEach((node)=> {
-            bareSuper.insertAfter(node)
-          })
-        }
-      } else {
-        newNodes.forEach((node)=> {
-          constructor.get('body').unshiftContainer('body', node)
-        })
-      }
+      classBody.get('body')
+        .filter((node) => (
+          node.isClassMethod({ kind: 'method' })
+          && IGNORED_METHODS.indexOf(node.node.key.name) == -1
+        ))
+        .forEach((node) => {
+          classBody.pushContainer('body', buildBoundMethod(types, node.node.key.name))
+        });
     },
   },
-})
+});
