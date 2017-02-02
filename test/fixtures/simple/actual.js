@@ -1,18 +1,9 @@
 class Example {
-  
-  constructor(){
-    this.greeting = 'Hello'
+  prop1 = 'prop1';
+
+  constructor() {
+    this.prop2 = 'prop2';
   }
-  
-  greet(){
-    console.log(this.greeting)
-  }
-  
-  render(){
-    setTimeout(this.greet, 0)
-  }
+
+  method1() {}
 }
-
-const example = new Example()
-
-example.render() // logs out 'Hello', in vanilla js it would log out undefined

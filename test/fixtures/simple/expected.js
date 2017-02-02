@@ -4,50 +4,20 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _makeJsClassGreatAgain(_this, funcName, params) {
-  return Object.getPrototypeOf(_this)[funcName].apply(_this, params);
-}
-
 var Example = function () {
   function Example() {
-    var _this2 = this;
-
     _classCallCheck(this, Example);
 
-    this.render = function () {
-      for (var _len = arguments.length, rest = Array(_len), _key = 0; _key < _len; _key++) {
-        rest[_key] = arguments[_key];
-      }
+    this.method1 = this.method1.bind(this);
+    this.prop1 = 'prop1';
 
-      return _makeJsClassGreatAgain(_this2, 'render', rest);
-    };
-
-    this.greet = function () {
-      for (var _len2 = arguments.length, rest = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        rest[_key2] = arguments[_key2];
-      }
-
-      return _makeJsClassGreatAgain(_this2, 'greet', rest);
-    };
-
-    this.greeting = 'Hello';
+    this.prop2 = 'prop2';
   }
 
   _createClass(Example, [{
-    key: 'greet',
-    value: function greet() {
-      console.log(this.greeting);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      setTimeout(this.greet, 0);
-    }
+    key: 'method1',
+    value: function method1() {}
   }]);
 
   return Example;
 }();
-
-var example = new Example();
-
-example.render(); // logs out 'Hello', in vanilla js it would log out undefined

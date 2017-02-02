@@ -1,21 +1,36 @@
-class Simple {
-  greet(){
-    console.log(this.greeting)
+class Parent {
+  prop1 = 'prop1';
+
+  constructor() {
+    this.prop2 = 'prop2';
   }
+
+  method1() {}
+
+  render() {}
 }
 
-class Example extends Simple {
-  
-  constructor(){
-    super()
-    this.greeting = 'Hello'
+class Child
+extends Parent {
+  constructor() {
+    super();
+
+    this.prop3 = 'prop3';
   }
-  
-  render(){
-    setTimeout(this.greet, 0)
-  }
+
+  method2() {}
 }
 
-const example = new Example()
+class ChildNoConstructor
+extends Parent {
+  method2() {}
+}
 
-example.render() // logs out 'Hello', in vanilla js it would log out undefined
+class ChildNoConstructorWithProperties
+extends Parent {
+  prop1 = 'prop1';
+
+  method1() {}
+
+  render() {}
+}
