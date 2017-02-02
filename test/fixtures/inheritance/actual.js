@@ -1,36 +1,44 @@
 class Parent {
-  prop1 = 'prop1';
+  static staticProp1 = 'staticProp1';
+
+  static staticMethod1() {}
+
+  classProp1 = 'classProp1';
 
   constructor() {
-    this.prop2 = 'prop2';
+    this.classProp2 = 'classProp2';
   }
 
-  method1() {}
+  classMethod1() {}
 
   render() {}
 }
 
 class Child
 extends Parent {
+  static staticProp2 = 'staticProp2';
+
+  static staticMethod2() {}
+
   constructor() {
     super();
 
-    this.prop3 = 'prop3';
+    this.classProp3 = 'classProp3';
   }
 
-  method2() {}
+  classMethod2() {}
 }
 
 class ChildNoConstructor
 extends Parent {
-  method2() {}
+  classMethod2() {}
 }
 
 class ChildNoConstructorWithProperties
 extends Parent {
-  prop1 = 'prop1';
+  classProp1 = 'classProp1';
 
-  method1() {}
+  classMethod1() {}
 
   render() {}
 }

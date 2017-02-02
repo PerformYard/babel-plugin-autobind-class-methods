@@ -1,5 +1,9 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -9,18 +13,23 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Parent = function () {
+  _createClass(Parent, null, [{
+    key: 'staticMethod1',
+    value: function staticMethod1() {}
+  }]);
+
   function Parent() {
     _classCallCheck(this, Parent);
 
-    this.method1 = this.method1.bind(this);
-    this.prop1 = 'prop1';
+    this.classMethod1 = this.classMethod1.bind(this);
+    this.classProp1 = 'classProp1';
 
-    this.prop2 = 'prop2';
+    this.classProp2 = 'classProp2';
   }
 
   _createClass(Parent, [{
-    key: 'method1',
-    value: function method1() {}
+    key: 'classMethod1',
+    value: function classMethod1() {}
   }, {
     key: 'render',
     value: function render() {}
@@ -29,28 +38,38 @@ var Parent = function () {
   return Parent;
 }();
 
-var Child = function (_Parent) {
+Parent.staticProp1 = 'staticProp1';
+exports.default = Parent;
+
+var Child = exports.Child = function (_Parent) {
   _inherits(Child, _Parent);
+
+  _createClass(Child, null, [{
+    key: 'staticMethod2',
+    value: function staticMethod2() {}
+  }]);
 
   function Child() {
     _classCallCheck(this, Child);
 
     var _this = _possibleConstructorReturn(this, (Child.__proto__ || Object.getPrototypeOf(Child)).call(this));
 
-    _this.method2 = _this.method2.bind(_this);
+    _this.classMethod2 = _this.classMethod2.bind(_this);
 
 
-    _this.prop3 = 'prop3';
+    _this.classProp3 = 'classProp3';
     return _this;
   }
 
   _createClass(Child, [{
-    key: 'method2',
-    value: function method2() {}
+    key: 'classMethod2',
+    value: function classMethod2() {}
   }]);
 
   return Child;
 }(Parent);
+
+Child.staticProp2 = 'staticProp2';
 
 var ChildNoConstructor = function (_Parent2) {
   _inherits(ChildNoConstructor, _Parent2);
@@ -66,12 +85,12 @@ var ChildNoConstructor = function (_Parent2) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, (_ref = ChildNoConstructor.__proto__ || Object.getPrototypeOf(ChildNoConstructor)).call.apply(_ref, [this].concat(args))), _this2), _this2.method2 = _this2.method2.bind(_this2), _temp), _possibleConstructorReturn(_this2, _ret);
+    return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, (_ref = ChildNoConstructor.__proto__ || Object.getPrototypeOf(ChildNoConstructor)).call.apply(_ref, [this].concat(args))), _this2), _this2.classMethod2 = _this2.classMethod2.bind(_this2), _temp), _possibleConstructorReturn(_this2, _ret);
   }
 
   _createClass(ChildNoConstructor, [{
-    key: 'method2',
-    value: function method2() {}
+    key: 'classMethod2',
+    value: function classMethod2() {}
   }]);
 
   return ChildNoConstructor;
@@ -91,12 +110,12 @@ var ChildNoConstructorWithProperties = function (_Parent3) {
       args[_key2] = arguments[_key2];
     }
 
-    return _ret2 = (_temp2 = (_temp3 = (_this3 = _possibleConstructorReturn(this, (_ref2 = ChildNoConstructorWithProperties.__proto__ || Object.getPrototypeOf(ChildNoConstructorWithProperties)).call.apply(_ref2, [this].concat(args))), _this3), _this3.method1 = _this3.method1.bind(_this3), _temp3), _this3.prop1 = 'prop1', _temp2), _possibleConstructorReturn(_this3, _ret2);
+    return _ret2 = (_temp2 = (_temp3 = (_this3 = _possibleConstructorReturn(this, (_ref2 = ChildNoConstructorWithProperties.__proto__ || Object.getPrototypeOf(ChildNoConstructorWithProperties)).call.apply(_ref2, [this].concat(args))), _this3), _this3.classMethod1 = _this3.classMethod1.bind(_this3), _temp3), _this3.classProp1 = 'classProp1', _temp2), _possibleConstructorReturn(_this3, _ret2);
   }
 
   _createClass(ChildNoConstructorWithProperties, [{
-    key: 'method1',
-    value: function method1() {}
+    key: 'classMethod1',
+    value: function classMethod1() {}
   }, {
     key: 'render',
     value: function render() {}
@@ -109,12 +128,12 @@ var NoConstructor = function () {
   function NoConstructor() {
     _classCallCheck(this, NoConstructor);
 
-    this.method1 = this.method1.bind(this);
+    this.classMethod1 = this.classMethod1.bind(this);
   }
 
   _createClass(NoConstructor, [{
-    key: 'method1',
-    value: function method1() {}
+    key: 'classMethod1',
+    value: function classMethod1() {}
   }, {
     key: 'render',
     value: function render() {}
@@ -127,13 +146,13 @@ var NoConstructorWithProperties = function () {
   function NoConstructorWithProperties() {
     _classCallCheck(this, NoConstructorWithProperties);
 
-    this.method1 = this.method1.bind(this);
-    this.prop1 = 'prop1';
+    this.classMethod1 = this.classMethod1.bind(this);
+    this.classProp1 = 'classProp1';
   }
 
   _createClass(NoConstructorWithProperties, [{
-    key: 'method1',
-    value: function method1() {}
+    key: 'classMethod1',
+    value: function classMethod1() {}
   }, {
     key: 'render',
     value: function render() {}

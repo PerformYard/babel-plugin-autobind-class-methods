@@ -1,9 +1,13 @@
-class Example {
-  prop1 = 'prop1';
+export default class Example {
+  static staticProp1 = 'staticProp1';
+
+  static staticMethod1() {}
+
+  classProp1 = 'classProp1';
 
   constructor() {
-    this.prop2 = 'prop2';
+    this.classProp2 = 'classProp2';
   }
 
-  method1() {}
+  classMethod1() {}
 }

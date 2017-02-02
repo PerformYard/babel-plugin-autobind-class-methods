@@ -7,7 +7,7 @@ extends React.Component {
   constructor(props) {
     super(props);
 
-    this.prop1 = 'prop1';
+    this.classProp1 = 'classProp1';
   }
 
   componentWillMount() {}
@@ -26,5 +26,5 @@ extends React.Component {
 
   render() {}
 
-  method1() {}
+  classMethod1() {}
 }

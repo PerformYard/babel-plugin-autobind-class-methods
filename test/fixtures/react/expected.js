@@ -16,13 +16,13 @@ var Component = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Component.__proto__ || Object.getPrototypeOf(Component)).call(this, props));
 
-    _this.method1 = _this.method1.bind(_this);
+    _this.classMethod1 = _this.classMethod1.bind(_this);
     _this.state = {
       prop: 'Hello'
     };
 
 
-    _this.prop1 = 'prop1';
+    _this.classProp1 = 'classProp1';
     return _this;
   }
 
@@ -51,8 +51,8 @@ var Component = function (_React$Component) {
     key: 'render',
     value: function render() {}
   }, {
-    key: 'method1',
-    value: function method1() {}
+    key: 'classMethod1',
+    value: function classMethod1() {}
   }]);
 
   return Component;
