@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-autobind-class-methods",
-  "version": "4.0.0",
+  "version": "5.0.1",
   "description": "Babel plugin that binds every class method to \"this\" with hot reload support",
   "main": "lib/index.js",
   "scripts": {
